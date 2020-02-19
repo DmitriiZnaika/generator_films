@@ -43,6 +43,7 @@
   "devDependencies": {
     "@material-ui/icons": "^4.9.1",
     "eslint": "^6.8.0",
-    "eslint-plugin-react": "^7.18.3"
+    "eslint-plugin-react": "^7.18.3",
+    "react-player": "^1.15.2"
   }
 }

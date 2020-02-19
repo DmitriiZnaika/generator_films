@@ -2,14 +2,14 @@ import React from 'react';
 import './App.css';
 import ButtonAppBar from "./components/appBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Album from "./components/mainPart";
+import Main from "./components/mainPart";
 
 function App() {
   return (
       <React.Fragment>
         <CssBaseline />
         <ButtonAppBar/>
-        <Album/>
+        <Main/>
       </React.Fragment>
   );
 }
