@@ -14,7 +14,7 @@ import clsx from 'clsx';
 import Slider from '@material-ui/core/Slider';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { green } from '@material-ui/core/colors';
-import { countries, rating, genre, markYears } from   '../config/filters'
+import { countries, rating, genre, markYears, markRating } from   '../config/filters'
 
 
 
@@ -95,6 +95,9 @@ function getStyles(name, personName, theme) {
 function valuetext(value) {
     return `${value}`;
 }
+function valuetext1(value1) {
+    return `${value1}`;
+}
 
 
 export default function Filters() {
@@ -142,10 +145,16 @@ export default function Filters() {
             }, 2000);
         }
     };
-    const [value, setValue] = useState([1900, 2025]);
+    const [value, setValue] = useState([1900, 2021]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+    };
+
+    const [value1, setValue1] = useState([1.0, 10.0]);
+
+    const handleChange1 = (event1, newValue1) => {
+        setValue1(newValue1);
     };
 
 
@@ -177,7 +186,7 @@ export default function Filters() {
                                         value={value}
                                         onChange={handleChange}
                                         valueLabelDisplay="auto"
-                                        max={2025}
+                                        max={2021}
                                         min={1900}
                                         marks={markYears}
                                         aria-labelledby="range-slider"
@@ -185,27 +194,45 @@ export default function Filters() {
                                     />
                                 </div>
                                 </Grid >
-                                <Grid item xs={3}>
-                                        <FormControl className={classes.formControl}>
-                                            <InputLabel htmlFor="age-native-simple">Rating</InputLabel>
-                                            <Select
-                                                labelId="demo-mutiple-name-label"
-                                                id="demo-mutiple-name"
-                                                // multiple
-                                                value={ratingFilm}
-                                                onChange={handleChangeYear}
-                                                input={<Input />}
-                                                MenuProps={MenuProps}
-                                            >
-                                                {rating.map(rating => (
-                                                    <MenuItem key={rating} value={rating} style={getStyles(rating, personName, theme)}>
-                                                        {rating}
-                                                    </MenuItem>
-                                                ))}
-                                            </Select>
-                                        </FormControl>
-                                    </Grid >
-                                    <Grid item xs={3}>
+                                <Grid item xs={12}>
+                                    <div className={classes.root}>
+                                        <Typography id="range-slider" gutterBottom variant="h5" align="center" color="textSecondary" paragraph>
+                                            Rating
+                                        </Typography>
+                                        <Slider
+                                            value={value1}
+                                            onChange={handleChange1}
+                                            valueLabelDisplay="auto"
+                                            step={0.1}
+                                            max={10.00}
+                                            min={1.00}
+                                            marks={markRating}
+                                            aria-labelledby="range-slider"
+                                            getAriaValueText={valuetext1}
+                                        />
+                                    </div>
+                                </Grid >
+                                {/*<Grid item xs={3}>*/}
+                                {/*        <FormControl className={classes.formControl}>*/}
+                                {/*            <InputLabel htmlFor="age-native-simple">Rating</InputLabel>*/}
+                                {/*            <Select*/}
+                                {/*                labelId="demo-mutiple-name-label"*/}
+                                {/*                id="demo-mutiple-name"*/}
+                                {/*                // multiple*/}
+                                {/*                value={ratingFilm}*/}
+                                {/*                onChange={handleChangeYear}*/}
+                                {/*                input={<Input />}*/}
+                                {/*                MenuProps={MenuProps}*/}
+                                {/*            >*/}
+                                {/*                {rating.map(rating => (*/}
+                                {/*                    <MenuItem key={rating} value={rating} style={getStyles(rating, personName, theme)}>*/}
+                                {/*                        {rating}*/}
+                                {/*                    </MenuItem>*/}
+                                {/*                ))}*/}
+                                {/*            </Select>*/}
+                                {/*        </FormControl>*/}
+                                {/*    </Grid >*/}
+                                    <Grid item>
                                         <FormControl className={classes.formControl}>
                                         <InputLabel htmlFor="age-native-simple">Genre</InputLabel>
                                         <Select
@@ -225,7 +252,7 @@ export default function Filters() {
                                         </Select>
                                         </FormControl>
                                     </Grid>
-                                    <Grid item xs={3}>
+                                    <Grid item>
                                         <FormControl className={classes.formControl}>
                                         <InputLabel htmlFor="age-native-simple">Country</InputLabel>
                                         <Select
