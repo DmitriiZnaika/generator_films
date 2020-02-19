@@ -3,16 +3,55 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
+            <Link color="inherit"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href="https://material-ui.com/">
                 Your Website
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
+        </Typography>
+    );
+}
+
+function SocialNetwork() {
+    return (
+        <Typography variant="body2" color="textSecondary" align="center">
+            <Link color="inherit"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href="https://www.facebook.com/">
+                <FacebookIcon/>
+            </Link>{' '}
+            <Link color="inherit"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href="https://www.instagram.com/">
+                <InstagramIcon/>
+            </Link>{' '}
+            <Link color="inherit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://twitter.com/">
+                <TwitterIcon/>
+            </Link>{' '}
+            <Link color="inherit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.whatsapp.com/">
+                <WhatsAppIcon/>
+            </Link>{' '}
+
         </Typography>
     );
 }
@@ -57,12 +96,7 @@ export default function Footer() {
         <React.Fragment>
             <CssBaseline />
             <footer className={classes.footer}>
-                <Typography variant="h6" align="center" gutterBottom>
-                    Footer
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-                    Something here to give the footer a purpose!
-                </Typography>
+                <SocialNetwork/>
                 <Copyright />
             </footer>
         </React.Fragment>

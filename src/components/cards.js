@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
     },
     cardMedia: {
-        paddingTop: '150.25%', // 16:9
+        paddingTop: '100.25%', // 16:9
     },
     cardContent: {
         flexGrow: 1,
@@ -93,13 +93,29 @@ export default function Cards() {
                                         image="https://source.unsplash.com/random"
                                         title="Image title"
                                     />
-                                    <CardContent className={classes.cardContent}>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            The Secret Life of Pets 2
-                                        </Typography>
-                                        <Typography>
-                                            Rating: 6.6
-                                        </Typography>
+                                    <CardContent className={classes.cardContent} >
+                                        <Grid container spacing={2} justify="center" direction="column">
+                                            <Grid item>
+                                                <Typography gutterBottom variant="h5" component="h2">
+                                                    The Secret Life of Pets 2
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item>
+                                                <Typography>
+                                                    Rating: 6.6
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item>
+                                                <Typography>
+                                                    Drama
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item>
+                                                <Typography>
+                                                    Release year: 1995
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
                                     </CardContent>
                                     {/*<CardActions>*/}
                                     <div className={classes.buttonsOptions}>
@@ -111,42 +127,34 @@ export default function Cards() {
                                             alignItems="center"
                                         >
                                             <Grid item>
-                                                {/*<Button*/}
-                                                {/*    style={{width: "150px", height: "50px"}}*/}
-                                                {/*    variant="outlined"*/}
-                                                {/*    color="primary"*/}
-                                                {/*>*/}
-                                                {/*    /!*<ReactPlayer url='https://www.youtube.com/watch?v=ysz5S6PUM-U' playing />*!/*/}
-                                                {/*    Watch trailer*/}
-                                                {/*</Button>*/}
-                                                    <Button
-                                                        type="button"
-                                                        onClick={handleOpen}
-                                                        style={{width: "150px", height: "50px"}}
-                                                        color="primary"
-                                                        variant="contained"
-                                                    >
-                                                        Watch trailer
-                                                    </Button>
-                                                    <Modal
-                                                        aria-labelledby="simple-modal-title"
-                                                        aria-describedby="simple-modal-description"
-                                                        open={open}
-                                                        onClose={handleClose}
-                                                    >
-                                                        <div style={modalStyle} className={classes.paper}>
-                                                            <div className={classes.playerWrapper}>
-                                                                <ReactPlayer
-                                                                    className={classes.reactPlayer}
-                                                                    youtubeConfig={{ playerVars: { showinfo: 1 } }}
-                                                                    controls={true}
-                                                                    url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
-                                                                    width='100%'
-                                                                    height='100%'
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </Modal>
+                                                <Button
+                                                    type="button"
+                                                    onClick={handleOpen}
+                                                    style={{width: "150px", height: "50px"}}
+                                                    color="primary"
+                                                    variant="contained"
+                                                >
+                                                    Watch trailer
+                                                </Button>
+                                                <Modal
+                                                    aria-labelledby="simple-modal-title"
+                                                    aria-describedby="simple-modal-description"
+                                                    open={open}
+                                                    onClose={handleClose}
+                                                >
+                                                <div style={modalStyle} className={classes.paper}>
+                                                    <div className={classes.playerWrapper}>
+                                                        <ReactPlayer
+                                                            className={classes.reactPlayer}
+                                                            youtubeConfig={{ playerVars: { showinfo: 1 } }}
+                                                            controls={true}
+                                                            url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
+                                                            width='100%'
+                                                            height='100%'
+                                                        />
+                                                    </div>
+                                                </div>
+                                                </Modal>
                                             </Grid>
                                             <Grid item>
                                                 <Button
@@ -154,7 +162,14 @@ export default function Cards() {
                                                     variant="contained"
                                                     color="primary"
                                                 >
-                                                    <a href="https://www.amazon.com/s?k=The+Secret+Life+of+Pets+2+movie&tag=jhpho07-20" target="_blank" style={{textDecoration:"none", color:"white"}}>Amazon</a>
+                                                    <a
+                                                        href="https://www.amazon.com/s?k=The+Secret+Life+of+Pets+2+movie&tag=jhpho07-20"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        style={{textDecoration:"none", color:"white"}}
+                                                    >
+                                                        Amazon
+                                                    </a>
                                                 </Button>
                                             </Grid>
                                         </Grid>

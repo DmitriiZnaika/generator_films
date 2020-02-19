@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useRef} from 'react';
+import React, { useEffect, useState, useRef} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -11,9 +11,10 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
 import clsx from 'clsx';
+import Slider from '@material-ui/core/Slider';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { green } from '@material-ui/core/colors';
-import { countries, names } from   '../config/filters'
+import { countries, rating, genre, markYears } from   '../config/filters'
 
 
 
@@ -63,6 +64,10 @@ const useStyles = makeStyles(theme => ({
         marginTop: -12,
         marginLeft: -12,
     },
+    root: {
+        width: 500,
+        margin: 'auto',
+    },
 }));
 
 
@@ -71,6 +76,8 @@ const ITEM_PADDING_TOP = 8;
 const MenuProps = {
     PaperProps: {
         style: {
+            color: 'green',
+            position: 'absolute',
             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
             width: 250,
         },
@@ -85,13 +92,16 @@ function getStyles(name, personName, theme) {
                 : theme.typography.fontWeightMedium,
     };
 }
+function valuetext(value) {
+    return `${value}`;
+}
 
 
 export default function Filters() {
     const classes = useStyles();
     const theme = useTheme();
     const [personName, setPersonName] = useState([]);
-    const [yearFilm, setYear] = useState([]);
+    const [ratingFilm, setRating] = useState([]);
     const [country, setCountry] = useState([]);
 
     const handleChangeName = event => {
@@ -103,7 +113,7 @@ export default function Filters() {
     //     });
     // };
     const handleChangeYear = event => {
-        setYear(event.target.value);
+        setRating(event.target.value);
     };
     const handleChangeCountry = event => {
         setCountry(event.target.value);
@@ -132,16 +142,22 @@ export default function Filters() {
             }, 2000);
         }
     };
+    const [value, setValue] = useState([1900, 2025]);
 
-    const year = (new Date()).getFullYear();
-    const years = Array.from(new Array(20),( val, index) => index + year);
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+
+    // const year = (new Date(0)).getFullYear();
+    // const years = Array.from(new Array(55),( val, index) => index + year);
 
     return (
         <React.Fragment>
             <CssBaseline />
             <main>
                 <div className={classes.heroContent}>
-                    <Container style={{width: "1300px"}}>
+                    <Container>
                         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                             Generator Films
                         </Typography>
@@ -152,56 +168,72 @@ export default function Filters() {
                         </Typography>
                         <div >
                             <Grid container spacing={2} justify="center">
-                                    <Grid item>
+                                <Grid item xs={12}>
+                                <div className={classes.root}>
+                                    <Typography id="range-slider" gutterBottom variant="h5" align="center" color="textSecondary" paragraph>
+                                        A period of years.
+                                    </Typography>
+                                    <Slider
+                                        value={value}
+                                        onChange={handleChange}
+                                        valueLabelDisplay="auto"
+                                        max={2025}
+                                        min={1900}
+                                        marks={markYears}
+                                        aria-labelledby="range-slider"
+                                        getAriaValueText={valuetext}
+                                    />
+                                </div>
+                                </Grid >
+                                <Grid item xs={3}>
                                         <FormControl className={classes.formControl}>
-                                            <InputLabel htmlFor="age-native-simple">Year</InputLabel>
+                                            <InputLabel htmlFor="age-native-simple">Rating</InputLabel>
                                             <Select
                                                 labelId="demo-mutiple-name-label"
                                                 id="demo-mutiple-name"
                                                 // multiple
-                                                value={yearFilm}
+                                                value={ratingFilm}
                                                 onChange={handleChangeYear}
                                                 input={<Input />}
                                                 MenuProps={MenuProps}
                                             >
-                                                {years.map(years => (
-                                                    <MenuItem key={years} value={years} style={getStyles(years, personName, theme)}>
-                                                        {years}
+                                                {rating.map(rating => (
+                                                    <MenuItem key={rating} value={rating} style={getStyles(rating, personName, theme)}>
+                                                        {rating}
                                                     </MenuItem>
                                                 ))}
                                             </Select>
                                         </FormControl>
                                     </Grid >
-                                    <Grid item >
+                                    <Grid item xs={3}>
                                         <FormControl className={classes.formControl}>
-                                        <InputLabel htmlFor="age-native-simple">Actor</InputLabel>
+                                        <InputLabel htmlFor="age-native-simple">Genre</InputLabel>
                                         <Select
                                             labelId="demo-mutiple-name-label"
                                             id="demo-mutiple-name"
-                                            // multiple
+                                            multiple
                                             value={personName}
                                             onChange={handleChangeName}
-                                            input={<Input />}
+                                            // input={<Input />}
                                             MenuProps={MenuProps}
                                         >
-                                            {names.map(name => (
-                                                <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
-                                                    {name}
+                                            {genre.map(genre => (
+                                                <MenuItem key={genre} value={genre} style={getStyles(genre, personName, theme)}>
+                                                    {genre}
                                                 </MenuItem>
                                             ))}
                                         </Select>
                                         </FormControl>
                                     </Grid>
-                                    <Grid item >
+                                    <Grid item xs={3}>
                                         <FormControl className={classes.formControl}>
                                         <InputLabel htmlFor="age-native-simple">Country</InputLabel>
                                         <Select
                                             labelId="demo-mutiple-name-label"
                                             id="demo-mutiple-name"
-                                            // multiple
+                                            multiple
                                             value={country}
                                             onChange={handleChangeCountry}
-                                            input={<Input />}
                                             MenuProps={MenuProps}
                                         >
                                             {countries.map(name => (
