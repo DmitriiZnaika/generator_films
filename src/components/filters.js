@@ -8,13 +8,12 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
 import clsx from 'clsx';
 import Slider from '@material-ui/core/Slider';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { green } from '@material-ui/core/colors';
-import { countries, rating, genre, markYears, markRating } from   '../config/filters'
+import { countries, genre, markYears, markRating } from   '../config/filters'
 
 
 
@@ -104,20 +103,14 @@ export default function Filters() {
     const classes = useStyles();
     const theme = useTheme();
     const [personName, setPersonName] = useState([]);
-    const [ratingFilm, setRating] = useState([]);
     const [country, setCountry] = useState([]);
+    const [ratingFilm, setRating] = useState([1.0, 10.0]);
+    const [value, setValue] = useState([1900, 2021]);
 
     const handleChangeName = event => {
         setPersonName(event.target.value);
     };
-    // const handleChangeName = name => event => {
-    //     setPersonName({
-    //         [name]: event.target.value,
-    //     });
-    // };
-    const handleChangeYear = event => {
-        setRating(event.target.value);
-    };
+
     const handleChangeCountry = event => {
         setCountry(event.target.value);
     };
@@ -145,16 +138,13 @@ export default function Filters() {
             }, 2000);
         }
     };
-    const [value, setValue] = useState([1900, 2021]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    const [value1, setValue1] = useState([1.0, 10.0]);
-
-    const handleChange1 = (event1, newValue1) => {
-        setValue1(newValue1);
+    const handleChangeRating = (event1, newValue1) => {
+        setRating(newValue1);
     };
 
 
@@ -200,8 +190,8 @@ export default function Filters() {
                                             Rating
                                         </Typography>
                                         <Slider
-                                            value={value1}
-                                            onChange={handleChange1}
+                                            value={ratingFilm}
+                                            onChange={handleChangeRating}
                                             valueLabelDisplay="auto"
                                             step={0.1}
                                             max={10.00}
